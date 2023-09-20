@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Dan Lucas" content="Dan Lucas">
+    <meta http-equiv="content-language" content="pt-BR">
+
+    <title>Título da Página</title>
+    <style>
+        /* Estilo para mover as imagens */
+        .imagem-segunda {
+            float: right 10;
+            margin-left: 80px;
+            margin-top: -40px;
+        }
+
+        .imagem-terca {
+            float: right 10;
+            margin-left: 140px;
+            margin-top: -30px;
+        }
+
+        .imagem-quarta {
+            float: right 10;
+            margin-left: 160px;
+            margin-top: -30px;
+        }
+
+        .imagem-quinta {
+            float: right 10;
+            margin-left: 165px;
+            margin-top: -30px;
+        }
+
+        .imagem-sexta {
+            float: right 10;
+            margin-left: 110px;
+            margin-top: -30px;
+        }
+
+        .text1 {
+            h1 {
+                text-align: right;
+            }
+        }
+
+        /* Estilo para os quadrados */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(28, 31px);
+            grid-gap: 5px;
+            justify-content: flex-end;
+            padding-top: -45%;
+        }
+
+        .quadradinho {
+            width: 30px;
+            height: 30px;
+            background-color: #868d91;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .cardapio {
+            float: right 10;
+            margin-left: 15px;
+            margin-top: -200px;
+        }
+
+        /* Estilo para o botão */
+        #botaoMudarCores {
+            display: block;
+            margin: -20px auto;
+            padding: 35px 140px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-left: 650px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CARDÁPIO SEMANAL</h1>
+
+    <h2>
+        <pre>
+          SEGUNDA                  TERÇA                      QUARTA                    QUINTA                SEXTA
+    </pre>
+    </h2>
+
+    <!-- Imagem à direita -->
+    <img src="biscoito.png.png" width="120" height="90" class="imagem-segunda">
+
+    <!-- Imagem abaixo de "TERÇA" -->
+    <img src="biscoitoesuco.png.png" width="120" height="90" class="imagem-terca">
+
+    <img src="almoco.png.png" width="120" height="90" class="imagem-quarta">
+
+    <img src="cuscuz.jpg.jpg" width="120" height="90" class="imagem-quinta">
+
+    <img src="biscoito.png.png" width="120" height="90" class="imagem-sexta">
+
+    <h1 class="text1">CARDÁPIO DO DIA</h1>
+
+
+    <div class="container">
+        <!-- Quadrados gerados via JavaScript -->
+    </div>
+
+    <img src="almoco.png.png" width="300" height="260" class="cardapio">
+
+    <button id="botaoMudarCores">ACEITA?</button>
+
+    <script>
+        var container = document.querySelector(".container");
+        var quadradinhos = [];
+        var corAtual = 0;
+
+        // Função para criar os quadrados
+        function criarQuadrados() {
+            for (var i = 1; i <= 140; i++) {
+                var quadradinho = document.createElement("div");
+                quadradinho.className = "quadradinho";
+                quadradinho.textContent = i;
+                quadradinho.draggable = true;
+                quadradinho.id = "quadradinho" + i;
+                quadradinhos.push(quadradinho);
+                quadradinho.addEventListener("dragstart", iniciarArraste);
+                container.appendChild(quadradinho);
+            }
+        }
+
+        // Função para iniciar o movimento de arrastar
+        function iniciarArraste(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        // Função para soltar o quadrado em uma nova posição
+        function soltar(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var elemento = document.getElementById(data);
+
+            // Encontra a próxima célula vazia na coluna
+            var coluna = event.target;
+            var proximaCelulaVazia = coluna.querySelector(":empty");
+
+            if (proximaCelulaVazia) {
+                proximaCelulaVazia.appendChild(elemento);
+            }
+        }
+
+        // Função para mudar a cor dos quadrados
+        function mudarCor() {
+            if (corAtual < quadradinhos.length) {
+                quadradinhos[corAtual].style.backgroundColor = "#2ecc71"; // Verde
+                corAtual++;
+            }
+        }
+
+        // Adiciona o evento para soltar o quadrado
+        container.addEventListener("dragover", function (event) {
+            event.preventDefault();
+        });
+        container.addEventListener("drop", soltar);
+
+        // Cria os quadrados
+        criarQuadrados();
+
+        // Adiciona o evento ao botão
+        var botaoMudarCores = document.getElementById("botaoMudarCores");
+        botaoMudarCores.addEventListener("click", mudarCor);
+    </script>
+</body>
+
+</html>

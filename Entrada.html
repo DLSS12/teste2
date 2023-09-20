@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Entrada.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Website com Múltiplas Páginas</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./img/newlogo-removebg-preview.png" alt="Logo">
+        </div>
+    </header>
+
+    <div id="content">
+        <h1>Página Inicial</h1>
+        <a href="./index.html" onclick="loadPage('index')">Ir para a Página Inicial</a>
+        <a href="./Merendeira.html" onclick="loadPage('page1')">Ir para a Página 1</a>
+        <a href="#" onclick="loadPage('page2')">Ir para a Página 2</a>
+    </div>
+
+    <div id="page1" style="display:none;">
+        <h1>Página 1</h1>
+        <a href="./Entrada.html" onclick="loadPage('index')">Voltar para a Página Inicial</a>
+        <a href="#" onclick="loadPage('page2')">Ir para a Página 2</a>
+    </div>
+
+    <div id="page2" style="display:none;">
+        <h1>Página 2</h1>
+        <a href="#" onclick="loadPage('index')">Voltar para a Página Inicial</a>
+        <a href="#" onclick="loadPage('page1')">Ir para a Página 1</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

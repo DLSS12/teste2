@@ -1,0 +1,20 @@
+/* Estilos comuns a todas as páginas */
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+}
+
+a {
+    margin: 10px;
+    text-decoration: none;
+    color: #0077cc;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Estilos específicos para as páginas */
+#page1, #page2 {
+    display: none;
+}
